@@ -62,3 +62,33 @@ var swiper = new Swiper(".mySwiper", {
         prevEl: ".swiper-button-prev",
     },
 });
+
+
+//contact form submit
+
+
+function sendMail() {
+    var params = {
+        name: getElementById("name").value,
+        email: getElementById("email").value,
+        number: getElementById("number").value,
+        subject: getElementById("subject").value,
+        message: getElementById("message").value,
+    };
+
+    const serviceID = "service_stjqndj";
+    const templateID = "template_3kdv52r";
+    emailjs
+    .send(serviceID, templateID, params)
+    .then((res) => {
+        getElementById("name").value = "";
+        getElementById("email").value = "";
+        getElementById("number").value = "";
+        getElementById("subject").value = "";
+        getElementById("message").value = "";
+        console.log(res);
+        alert("Your message was sent successfully");
+
+    })
+    .catch((err) => console.log(err));
+}
