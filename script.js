@@ -79,6 +79,7 @@ contactForm.addEventListener('submit', async (e) => {
 
         if (response.ok) {
             alert('Email sent successfully!');
+            contactForm.reset(); // Reset the form
         } else {
             alert('Error sending email');
         }
