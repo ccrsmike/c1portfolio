@@ -66,20 +66,27 @@ var swiper = new Swiper(".mySwiper", {
 
 //contact form submit
 
-
 const contactForm = document.getElementById('contactForm');
 contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+    const formData = new FormData(contactForm);
+    const data = {};
+
+    formData.forEach((value, key) => {
+        data[key] = value;
+    });
 
     try {
         const response = await fetch('https://clivekema-backend.onrender.com/email/sendMail', {
             method: 'POST',
-            body: new FormData(contactForm),
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json',
+            },
         });
 
         if (response.ok) {
             alert('Email sent successfully!');
-            contactForm.reset(); // Reset the form
         } else {
             alert('Error sending email');
         }
@@ -87,3 +94,4 @@ contactForm.addEventListener('submit', async (e) => {
         console.error('Error:', error);
     }
 });
+
