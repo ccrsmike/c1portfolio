@@ -67,28 +67,32 @@ var swiper = new Swiper(".mySwiper", {
 //contact form submit
 
 
-function sendMail() {
-    var params = {
-        name: getElementById("name").value,
-        email: getElementById("email").value,
-        number: getElementById("number").value,
-        subject: getElementById("subject").value,
-        message: getElementById("message").value,
-    };
+const contactForm = document.getElementById('contactForm');
+contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-    const serviceID = "service_stjqndj";
-    const templateID = "template_3kdv52r";
-    emailjs
-    .send(serviceID, templateID, params)
-    .then((res) => {
-        getElementById("name").value = "";
-        getElementById("email").value = "";
-        getElementById("number").value = "";
-        getElementById("subject").value = "";
-        getElementById("message").value = "";
-        console.log(res);
-        alert("Your message was sent successfully");
+    const formData = new FormData(contactForm);
+    const data = {};
 
-    })
-    .catch((err) => console.log(err));
-}
+    formData.forEach((value, key) => {
+        data[key] = value;
+    });
+
+    try {
+        const response = await fetch('https://clivekema-backend.onrender.com/email/sendMail', {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (response.ok) {
+            alert('Email sent successfully!');
+        } else {
+            alert('Error sending email');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+});
