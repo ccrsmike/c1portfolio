@@ -71,20 +71,10 @@ const contactForm = document.getElementById('contactForm');
 contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const formData = new FormData(contactForm);
-    const data = {};
-
-    formData.forEach((value, key) => {
-        data[key] = value;
-    });
-
     try {
         const response = await fetch('https://clivekema-backend.onrender.com/email/sendMail', {
             method: 'POST',
-            body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            body: new FormData(contactForm),
         });
 
         if (response.ok) {
