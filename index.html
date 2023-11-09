@@ -350,14 +350,14 @@
     </section>
     <section class="contact" id="contact">
         <h2 class="heading">Contact <span>me!</span><span class="animate scroll" style="--i:1;"></span></h2>
-        <form>
+        <form id="contactForm">
             <div class="input-box">
                 <div class="input-field">
                     <input id="name" name="name" type="text" placeholder="Full Name" required>
                     <span class="focus"></span>
                 </div>
                 <div class="input-field">
-                    <input id="email" name="email" type="text" placeholder="Email Address" required>
+                    <input id="email" name="email" type="email" placeholder="Email Address" required>
                     <span class="focus"></span>
                 </div>
             </div>
@@ -377,7 +377,7 @@
                 <span class="focus"></span>
             </div>
             <div class="btn-box btns">
-                <button onclick="sendMail()" type="submit" class="btn">Submit</button>
+                <button type="submit" class="btn">Submit</button>
             </div>
             <span class="animate scroll" style="--i:2;"></span>
         </form>
